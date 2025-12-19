@@ -17,18 +17,15 @@ void trim_newline(char *line)
 }
 
 /**
- * run_command - execute a single-word command
- * @cmd: command string
- * @prog: program name (argv[0])
+ * run_command - execute a command with arguments (no PATH for now)
+ * @argv: NULL-terminated array (argv[0] is the command)
+ * @prog: program name (argv[0] of the shell)
+ * @envp: environment variables
  */
-void run_command(char *cmd, char *prog)
+void run_command(char **argv, char *prog, char **envp)
 {
 	pid_t pid;
 	int status;
-	char *argv_exec[2];
-
-	argv_exec[0] = cmd;
-	argv_exec[1] = NULL;
 
 	pid = fork();
 	if (pid == -1)
@@ -39,7 +36,7 @@ void run_command(char *cmd, char *prog)
 
 	if (pid == 0)
 	{
-		execve(cmd, argv_exec, environ);
+		execve(argv[0], argv, envp);
 		fprintf(stderr, "%s: %s\n", prog, strerror(errno));
 		_exit(127);
 	}

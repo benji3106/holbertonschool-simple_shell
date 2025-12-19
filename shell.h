@@ -8,15 +8,15 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-
-extern char **environ;
-
-
 #define PROMPT "#shellobscur$ "
-
+#define MAX_ARGS 64
 
 void print_prompt(int interactive);
 void trim_newline(char *line);
-void run_command(char *cmd, char *prog);
+
+
+
+void run_command(char **argv, char *prog, char **envp);
 
 #endif
+
