@@ -1,52 +1,46 @@
 #include "shell.h"
 
 /**
- * main - simple UNIX command interpreter
- * @ac: argument count
- * @av: argument vector
+ * main - simple shell
+ * @argc: argument count (unused)
+ * @argv: argument vector
  * @envp: environment variables
  *
- * Return: Always 0
+ * Return: 0
  */
-int main(int ac, char **av, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char *line;
-	size_t len;
-	ssize_t nread;
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t n;
 	int interactive;
-	char **argv_cmd;
+	char *av[2];
 
-	(void)ac;
-	line = NULL;
-	len = 0;
+	(void)argc;
 	interactive = isatty(STDIN_FILENO);
 
 	while (1)
 	{
-		print_prompt(interactive);
+		if (interactive)
+			printf("$ ");
+		fflush(stdout);
 
-		nread = getline(&line, &len, stdin);
-		if (nread == -1)
+		n = getline(&line, &len, stdin);
+		if (n == -1)
 		{
-			if (interactive)
-				write(STDOUT_FILENO, "\n", 1);
+			printf("\n");
 			free(line);
 			exit(0);
 		}
 
-		trim_newline(line);
-
+		line[n - 1] = '\0';
 		if (line[0] == '\0')
 			continue;
 
-		argv_cmd = tokenize(line);
-		if (argv_cmd == NULL || argv_cmd[0] == NULL)
-		{
-			free(argv_cmd);
-			continue;
-		}
-
-		run_command(argv_cmd, av[0], envp);
-		free(argv_cmd);
+		av[0] = line;
+		av[1] = NULL;
+		execute_cmd(av, argv[0], envp);
 	}
+
+	return (0);
 }
