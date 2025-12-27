@@ -23,7 +23,7 @@ void execute_cmd(char **av, char *prog_name, char **envp)
 		if (execve(av[0], av, envp) == -1)
 		{
 			perror(prog_name);
-			exit(1);
+			exit(127);
 		}
 	}
 	else

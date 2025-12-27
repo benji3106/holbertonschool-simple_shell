@@ -14,7 +14,7 @@ int main(int argc, char **argv, char **envp)
 	size_t len = 0;
 	ssize_t n;
 	int interactive;
-	char *av[2];
+	char **av;
 
 	(void)argc;
 	interactive = isatty(STDIN_FILENO);
@@ -37,9 +37,12 @@ int main(int argc, char **argv, char **envp)
 		if (line[0] == '\0')
 			continue;
 
-		av[0] = line;
-		av[1] = NULL;
+		av = tokenize(line);
+		if (av == NULL)
+			continue;
+
 		execute_cmd(av, argv[0], envp);
+		free(av);
 	}
 
 	return (0);
