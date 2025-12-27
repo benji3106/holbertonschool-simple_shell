@@ -28,7 +28,8 @@ int main(int argc, char **argv, char **envp)
 		n = getline(&line, &len, stdin);
 		if (n == -1)
 		{
-			printf("\n");
+			if (interactive)
+				printf("\n");
 			free(line);
 			exit(0);
 		}
@@ -38,9 +39,11 @@ int main(int argc, char **argv, char **envp)
 			continue;
 
 		av = tokenize(line);
-		if (av == NULL)
+		if (av == NULL || av[0] == NULL)
+		{
+			free(av);
 			continue;
-
+		}
 		execute_cmd(av, argv[0], envp);
 		free(av);
 	}
