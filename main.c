@@ -44,8 +44,15 @@ int main(int argc, char **argv, char **envp)
 			free(av);
 			continue;
 		}
-		
+
 		exit_shell(av, line);
+
+		if (env_shell(av, envp))
+		{
+			free(av);
+			continue;
+		}
+
 		execute_cmd(av, argv[0], envp);
 		free(av);
 	}

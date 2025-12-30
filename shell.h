@@ -10,4 +10,6 @@
 void execute_cmd(char **av, char *prog_name, char **envp);
 char **tokenize(char *line);
 int exit_shell(char **av, char *line);
+int env_shell(char **av, char **envp);
+
 #endif
