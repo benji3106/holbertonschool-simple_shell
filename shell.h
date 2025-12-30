@@ -7,9 +7,9 @@
 #include <sys/wait.h>
 #include <string.h>
 
-void execute_cmd(char **av, char *prog_name, char **envp);
-char **tokenize(char *line);
-int exit_shell(char **av, char *line);
-int env_shell(char **av, char **envp);
+void shell_execute(char **av, char *prog_name, char **envp);
+char **shell_tokenize(char *line);
+int shell_exit(char **av, char *line);
+int shell_env(char **av, char **envp);
 
 #endif

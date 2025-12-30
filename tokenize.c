@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * tokenize - split a line into tokens
+ * shell_tokenize - split a line into tokens
  * @line: the line to split
  *
  * Return: array of tokens, or NULL on failure
  */
-char **tokenize(char *line)
+char **shell_tokenize(char *line)
 {
 	char **tokens;
 	char *token;

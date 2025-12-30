@@ -38,22 +38,22 @@ int main(int argc, char **argv, char **envp)
 		if (line[0] == '\0')
 			continue;
 
-		av = tokenize(line);
+		av = shell_tokenize(line);
 		if (av == NULL || av[0] == NULL)
 		{
 			free(av);
 			continue;
 		}
 
-		exit_shell(av, line);
+		shell_exit(av, line);
 
-		if (env_shell(av, envp))
+		if (shell_env(av, envp))
 		{
 			free(av);
 			continue;
 		}
 
-		execute_cmd(av, argv[0], envp);
+		shell_execute(av, argv[0], envp);
 		free(av);
 	}
 

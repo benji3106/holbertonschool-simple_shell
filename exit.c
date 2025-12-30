@@ -1,12 +1,13 @@
 #include "shell.h"
+
 /**
- * exit_shell - free resources and exit the shell
+ * shell_exit - free resources and exit the shell
  * @av: argument vector
  * @line: input line
  *
  * Return: exit the program
  */
-int exit_shell(char **av, char *line)
+int shell_exit(char **av, char *line)
 {
 	if (strcmp(av[0], "exit") == 0)
 	{

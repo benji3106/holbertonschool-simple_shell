@@ -1,11 +1,12 @@
 #include "shell.h"
+
 /**
- * env_shell - prints the current environment variables
+ * shell_env - prints the current environment variables
  * @av: argument vector
  * @envp: environment variables
  * Return: 0
  */
-int env_shell(char **av, char **envp)
+int shell_env(char **av, char **envp)
 {
 	int i = 0;
 
