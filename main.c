@@ -14,6 +14,7 @@ int main(int argc, char **argv, char **envp)
 	size_t len = 0;
 	ssize_t n;
 	int interactive;
+	int line_count = 0;
 	char **av;
 
 	(void)argc;
@@ -22,7 +23,7 @@ int main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		if (interactive)
-			printf("$ ");
+			printf("($) ");
 		fflush(stdout);
 
 		n = getline(&line, &len, stdin);
@@ -34,6 +35,7 @@ int main(int argc, char **argv, char **envp)
 			exit(0);
 		}
 
+		line_count++;
 		line[n - 1] = '\0';
 		if (line[0] == '\0')
 			continue;
@@ -53,7 +55,7 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 
-		shell_execute(av, argv[0], envp);
+		shell_execute(av, argv[0], envp, line_count);
 		free(av);
 	}
 

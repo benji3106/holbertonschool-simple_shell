@@ -5,8 +5,9 @@
  * @av: argument vector
  * @prog_name: name of the shell (for error messages)
  * @envp: environment variables
+ * @line_count: current line number
  */
-void shell_execute(char **av, char *prog_name, char **envp)
+void shell_execute(char **av, char *prog_name, char **envp, int line_count)
 {
 	pid_t pid;
 
@@ -22,7 +23,7 @@ void shell_execute(char **av, char *prog_name, char **envp)
 	{
 		if (execve(av[0], av, envp) == -1)
 		{
-			perror(prog_name);
+			fprintf(stderr, "%s: %d: %s: not found\n", prog_name, line_count, av[0]);
 			exit(127);
 		}
 	}
