@@ -15,17 +15,13 @@ int main(int argc, char **argv, char **envp)
 	ssize_t n;
 	int interactive;
 	int line_count = 0;
-	char **av;
 
 	(void)argc;
 	interactive = isatty(STDIN_FILENO);
 
 	while (1)
 	{
-		if (interactive)
-			printf("($) ");
-		fflush(stdout);
-
+		shell_prompt(interactive);
 		n = getline(&line, &len, stdin);
 		if (n == -1)
 		{
@@ -37,26 +33,7 @@ int main(int argc, char **argv, char **envp)
 
 		line_count++;
 		line[n - 1] = '\0';
-		if (line[0] == '\0')
-			continue;
-
-		av = shell_tokenize(line);
-		if (av == NULL || av[0] == NULL)
-		{
-			free(av);
-			continue;
-		}
-
-		shell_exit(av, line);
-
-		if (shell_env(av, envp))
-		{
-			free(av);
-			continue;
-		}
-
-		shell_execute(av, argv[0], envp, line_count);
-		free(av);
+		shell_process_line(line, argv, envp, line_count);
 	}
 
 	return (0);
