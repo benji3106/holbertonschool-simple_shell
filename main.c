@@ -16,6 +16,8 @@ int main(int argc, char **argv, char **envp)
 	int interactive;
 	char **av;
 	char *fullpath;
+	unsigned int line_no = 0;
+	int last_status = 0;
 
 	(void)argc;
 	line = NULL;
@@ -30,9 +32,12 @@ int main(int argc, char **argv, char **envp)
 		if (n == -1)
 		{
 			if (interactive)
-				printf("\n");
-			break;
+				write(STDOUT_FILENO, "\n", 1);
+			free(line);
+			exit(last_status);
 		}
+
+		line_no++;
 
 		if (n > 0 && line[n - 1] == '\n')
 			line[n - 1] = '\0';
@@ -50,18 +55,26 @@ int main(int argc, char **argv, char **envp)
 		fullpath = resolve_path(av[0], envp);
 		if (fullpath == NULL)
 		{
-			fprintf(stderr, "%s: %s: not found\n", argv[0], av[0]);
+			fprintf(stderr, "%s: %u: %s: not found\n",
+				argv[0], line_no, av[0]);
+			last_status = 127;
 			free(av);
+
+			/* if non-interactive, stop immediately like sh */
+			if (!interactive)
+			{
+				free(line);
+				exit(last_status);
+			}
+
 			continue;
 		}
 
 		av[0] = fullpath;
 		execute_cmd(av, argv[0], envp);
+		last_status = 0; /* (optionnel) mieux: récupérer le vrai status */
 
 		free(fullpath);
 		free(av);
 	}
-
-	free(line);
-	return (0);
 }
