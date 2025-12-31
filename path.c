@@ -86,17 +86,14 @@ char *resolve_path(const char *cmd, char **envp)
 			free(path_copy);
 			return (NULL);
 		}
-
 		if (access(candidate, X_OK) == 0)
 		{
 			free(path_copy);
 			return (candidate);
 		}
-
 		free(candidate);
 		dir = strtok(NULL, ":");
 	}
-
 	free(path_copy);
 	return (NULL);
 }
