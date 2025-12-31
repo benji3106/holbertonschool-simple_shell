@@ -9,25 +9,21 @@
 void execute_cmd(char **av, char *prog_name, char **envp)
 {
 	pid_t pid;
+	int status;
 
 	pid = fork();
-
 	if (pid == -1)
 	{
-		perror("fork");
+		perror(prog_name);
 		return;
 	}
 
 	if (pid == 0)
 	{
-		if (execve(av[0], av, envp) == -1)
-		{
-			perror(prog_name);
-			exit(127);
-		}
+		execve(av[0], av, envp);
+		perror(prog_name);
+		_exit(127);
 	}
-	else
-	{
-		wait(NULL);
-	}
+
+	(void)waitpid(pid, &status, 0);
 }
