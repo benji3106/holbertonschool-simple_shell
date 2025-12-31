@@ -2,7 +2,7 @@
 
 /**
  * tokenize - split a line into tokens
- * @line: the line to split
+ * @line: the line to split (modified by strtok)
  *
  * Return: array of tokens, or NULL on failure
  */
@@ -10,32 +10,18 @@ char **tokenize(char *line)
 {
 	char **tokens;
 	char *token;
-	char *copy;
-	int count = 0;
-	int i = 0;
+	int i;
 
-	copy = strdup(line);
-	if (copy == NULL)
-		return (NULL);
-
-	token = strtok(copy, " ");
-	while (token != NULL)
-	{
-		count++;
-		token = strtok(NULL, " ");
-	}
-	free(copy);
-
-	tokens = malloc(sizeof(char *) * (count + 1));
+	tokens = malloc(sizeof(char *) * (MAX_ARGS + 1));
 	if (tokens == NULL)
 		return (NULL);
 
-	token = strtok(line, " ");
-	while (token != NULL)
+	i = 0;
+	token = strtok(line, " \t");
+	while (token != NULL && i < MAX_ARGS)
 	{
-		tokens[i] = token;
-		i++;
-		token = strtok(NULL, " ");
+		tokens[i++] = token;
+		token = strtok(NULL, " \t");
 	}
 	tokens[i] = NULL;
 
