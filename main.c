@@ -26,6 +26,13 @@ static int process_line(char *line, char *argv0, char **envp,
 		return (0);
 	}
 
+	if (strcmp(av[0], "env") == 0)
+	{
+		print_env(envp);
+		free(av);
+		return (0);
+	}
+
 	fullpath = resolve_path(av[0], envp);
 	if (fullpath == NULL)
 	{
