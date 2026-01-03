@@ -17,5 +17,6 @@ char **tokenize(char *line);
 
 const char *get_env_value(const char *name, char **envp);
 char *resolve_path(const char *cmd, char **envp);
+void print_env(char **envp);
 
 #endif
