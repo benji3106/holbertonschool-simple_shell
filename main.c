@@ -7,11 +7,12 @@
  * @envp: environment variables
  * @line_no: current line number
  * @interactive: 1 if interactive mode, 0 otherwise
+ * @linep: pointer to the line buffer (for freeing on exit)
  *
  * Return: 0 on success/continue, 127 if command not found in non-interactive
  */
 static int process_line(char *line, char *argv0, char **envp,
-		unsigned int line_no, int interactive)
+		unsigned int line_no, int interactive, char **linep)
 {
 	char **av;
 	char *fullpath;
@@ -26,6 +27,10 @@ static int process_line(char *line, char *argv0, char **envp,
 		return (0);
 	}
 
+	if (strcmp(av[0], "exit") == 0 || strcmp(av[0], "osokour") == 0)
+	{
+		handle_exit(av, linep);
+	}
 	if (strcmp(av[0], "env") == 0)
 	{
 		print_env(envp);
@@ -87,7 +92,7 @@ int main(int argc, char **argv, char **envp)
 		if (n > 0 && line[n - 1] == '\n')
 			line[n - 1] = '\0';
 
-		last_status = process_line(line, argv[0], envp, line_no, interactive);
+		last_status = process_line(line, argv[0], envp, line_no, interactive, &line);
 		if (!interactive && last_status != 0)
 			break;
 	}
