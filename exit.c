@@ -7,7 +7,7 @@
  */
 void handle_exit(char **av, char **linep, int status)
 {
-    free(av);
-    free(*linep);
-    exit(status);
+	free(av);
+	free(*linep);
+	exit(status);
 }
