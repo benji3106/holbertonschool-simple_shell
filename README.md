@@ -25,7 +25,13 @@ A simple UNIX command line interpreter implemented in C as part of the Holberton
 
 ## Description
 
-This project is a basic implementation of a UNIX shell that can execute commands, handle the PATH environment variable, and provide both interactive and non-interactive modes.
+This project is a basic implementation of a UNIX shell that can execute commands, handle the PATH environment variable, and provide both interactive and non-interactive modes. It replicates core functionality of standard shells like `/bin/sh`.
+
+**Key capabilities:**
+- Command execution with automatic PATH resolution
+- Process management using fork/exec
+- Environment variable handling
+- Interactive and non-interactive operation modes
 
 ## Getting Started
 
