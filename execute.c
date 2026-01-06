@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * execute_cmd - execute a command
+ * shell_execute - execute a command
  * @av: argument vector
  * @prog_name: name of the shell (for error messages)
  * @envp: environment variables

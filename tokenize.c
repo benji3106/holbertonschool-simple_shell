@@ -6,7 +6,7 @@
  *
  * Return: array of tokens, or NULL on failure
  */
-char **tokenize(char *line)
+char **shell_tokenize(char *line)
 {
 	char **tokens;
 	char *token;
