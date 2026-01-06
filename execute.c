@@ -5,8 +5,9 @@
  * @av: argument vector
  * @prog_name: name of the shell (for error messages)
  * @envp: environment variables
+ * Return: exit status of the command
  */
-void execute_cmd(char **av, char *prog_name, char **envp)
+int execute_cmd(char **av, char *prog_name, char **envp)
 {
 	pid_t pid;
 	int status;
@@ -15,7 +16,7 @@ void execute_cmd(char **av, char *prog_name, char **envp)
 	if (pid == -1)
 	{
 		perror(prog_name);
-		return;
+		return (1);
 	}
 
 	if (pid == 0)
@@ -25,5 +26,10 @@ void execute_cmd(char **av, char *prog_name, char **envp)
 		_exit(127);
 	}
 
-	(void)waitpid(pid, &status, 0);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+	{
+		return (WEXITSTATUS(status));
+	}
+	return (1);
 }

@@ -11,10 +11,11 @@
  * Return: 0 on success/continue, 127 if command not found in non-interactive
  */
 static int process_line(char *line, char *argv0, char **envp,
-		unsigned int line_no, int interactive, char **linep)
+		unsigned int line_no, int interactive, char **linep, int last_status)
 {
 	char **av;
 	char *fullpath;
+	int cmd_status;
 
 	if (line[0] == '\0')
 		return (0);
@@ -27,7 +28,7 @@ static int process_line(char *line, char *argv0, char **envp,
 
 	if (strcmp(av[0], "exit") == 0 || strcmp(av[0], "osokour") == 0)
     {
-        handle_exit(av, linep);}
+        handle_exit(av, linep, last_status);}
 
 	if (strcmp(av[0], "env") == 0)
 	{
@@ -44,11 +45,11 @@ static int process_line(char *line, char *argv0, char **envp,
 	}
 
 	av[0] = fullpath;
-	execute_cmd(av, argv0, envp);
+	cmd_status = execute_cmd(av, argv0, envp);
 
 	free(fullpath);
 	free(av);
-	return (0);
+	return (cmd_status);
 }
 
 
@@ -89,7 +90,7 @@ int main(int argc, char **argv, char **envp)
 		if (n > 0 && line[n - 1] == '\n')
 			line[n - 1] = '\0';
 
-		last_status = process_line(line, argv[0], envp, line_no, interactive, &line);
+		last_status = process_line(line, argv[0], envp, line_no, interactive, &line, last_status);
 		if (!interactive && last_status != 0)
 			break;
 	}
