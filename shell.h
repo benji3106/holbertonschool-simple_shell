@@ -14,7 +14,7 @@
 void print_prompt(int interactive);
 void execute_cmd(char **av, char *prog_name, char **envp);
 char **tokenize(char *line);
-
+void handle_exit(char **av, char **linep);
 const char *get_env_value(const char *name, char **envp);
 char *resolve_path(const char *cmd, char **envp);
 void print_env(char **envp);
