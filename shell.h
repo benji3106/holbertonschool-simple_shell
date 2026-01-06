@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-#include <errno.h>
 
 #define PROMPT "shellobscur "
 #define MAX_ARGS 64

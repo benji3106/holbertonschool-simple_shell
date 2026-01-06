@@ -27,9 +27,14 @@ int execute_cmd(char **av, char *prog_name, char **envp)
 	}
 
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
+
+	/* Vérifier si terminaison normale (équivalent de WIFEXITED) */
+	if ((status & 0x7F) == 0)
 	{
-		return (WEXITSTATUS(status));
+		/* Extraire le code de sortie (équivalent de WEXITSTATUS) */
+		return (status >> 8);
 	}
+
+	/* Terminé par signal = échec */
 	return (1);
 }
