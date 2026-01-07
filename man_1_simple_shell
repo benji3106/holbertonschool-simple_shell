@@ -1,0 +1,64 @@
+.TH SIMPLE_SHELL 1 "January 2026" "Holberton School" "User Commands"
+.SH NAME
+simple_shell \- a simple UNIX command interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+.br
+.B ./hsh
+
+.SH DESCRIPTION
+simple_shell is a simple UNIX command line interpreter.
+It reads commands from standard input and executes them.
+
+The shell works in both interactive and non-interactive modes.
+In interactive mode, a prompt is displayed and the shell waits
+for user input.
+In non-interactive mode, commands are read from standard input
+without displaying a prompt.
+
+Command lines may contain a command name and arguments separated
+by spaces.
+
+.SH BUILTINS
+The following built-in commands are supported:
+
+.TP
+.B env
+Prints the current environment.
+
+.TP
+.B exit
+Exits the shell.
+
+.TP
+.B osokour
+Exits the shell.
+
+.SH USAGE
+Interactive mode:
+.br
+.RS
+$ ./hsh
+.br
+shellobscur$ ls
+.br
+shellobscur$ exit
+.RE
+
+Non-interactive mode:
+.br
+.RS
+$ echo "ls" | ./hsh
+.RE
+
+.SH EXIT STATUS
+simple_shell returns the exit status of the last executed command.
+If a command is not found, the shell returns 127.
+
+.SH ENVIRONMENT
+The shell uses the PATH environment variable to locate executables.
+If PATH is not set, a default path of /bin:/usr/bin is used.
+
+.SH AUTHOR
+Written by Mateo Marques and Benjamin Bommier

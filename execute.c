@@ -27,9 +27,10 @@ int execute_cmd(char **av, char *prog_name, char **envp)
 	}
 
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
+
+	if ((status & 0x7F) == 0)
 	{
-		return (WEXITSTATUS(status));
+		return (status >> 8);
 	}
 	return (1);
 }
