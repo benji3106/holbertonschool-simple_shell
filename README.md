@@ -62,7 +62,17 @@ cd holbertonschool-simple_shell
 ```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shellobscur
 ```
+**What do these flags do?**
 
+| Flag | Purpose |
+|------|---------|
+| `-Wall` | Enable all common warnings |
+| `-Werror` | Treat warnings as errors |
+| `-Wextra` | Enable extra warnings |
+| `-pedantic` | Strict ISO C compliance |
+| `-std=gnu89` | Use GNU C89 standard |
+
+✅ This ensures the code is clean, bug-free, and follows C89 coding standards!
 4. Run the shell:
 ```bash
 ./shellobscur
