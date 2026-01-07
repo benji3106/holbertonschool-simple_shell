@@ -23,6 +23,10 @@ A simple UNIX command line interpreter implemented in C as part of the Holberton
 - [Limitations](#limitations)
 - [Authors](#authors)
 
+
+<img width="9069" height="23679" alt="Untitled diagram-2026-01-07-140643" src="https://github.com/user-attachments/assets/c3d0327a-bf4e-436e-a7dd-86bd1a159b62" />
+
+
 ## Description
 
 This project is a basic implementation of a UNIX shell that can execute commands, handle the PATH environment variable, and provide both interactive and non-interactive modes. It replicates core functionality of standard shells like `/bin/sh`.
