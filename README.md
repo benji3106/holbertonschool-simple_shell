@@ -24,7 +24,7 @@ A simple UNIX command line interpreter implemented in C as part of the Holberton
 - [Authors](#authors)
 
 
-<img width="9069" height="23679" alt="Untitled diagram-2026-01-07-140643" src="https://github.com/user-attachments/assets/c3d0327a-bf4e-436e-a7dd-86bd1a159b62" />
+
 
 
 ## Description
@@ -182,6 +182,8 @@ Error messages follow the format: `shell_name: line_number: command: not found`
 - No wildcard expansion (`*`, `?`)
 - No command history or line editing
 - No job control (background processes, `fg`, `bg`)
+
+<img width="9069" height="23679" alt="Untitled diagram-2026-01-07-140643" src="https://github.com/user-attachments/assets/c3d0327a-bf4e-436e-a7dd-86bd1a159b62" />
 
 ## Authors
 
