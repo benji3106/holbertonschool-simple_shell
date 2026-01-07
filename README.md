@@ -135,6 +135,26 @@ $
 | `exit.c` | Implements the `exit` built-in command |
 | `prompt.c` | Displays the shell prompt in interactive mode |
 
+## Man Page
+
+A manual page is available for this shell. To view it:
+
+
+```bash
+man simple_shell
+```
+
+### Content Overview
+
+The man page documents:
+- **NAME**: simple_shell - simple UNIX command interpreter
+- **SYNOPSIS**: `simple_shell` or `echo "command" | simple_shell`
+- **DESCRIPTION**: Interactive and non-interactive mode operation
+- **BUILT-INS**: `exit [status]`, `env`
+- **RETURN VALUES**: Exit codes (0, 127, etc.)
+- **EXAMPLES**: Common use cases
+- **AUTHORS**: Project credits
+
 ## Function Descriptions
 
 ### Main Functions
